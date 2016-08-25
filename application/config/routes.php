@@ -55,5 +55,8 @@ $route['default_controller'] = 'index/home';
 $route['translate_uri_dashes'] = FALSE;
 
 
-$route['admin'] = 'auth/index';
+$route['admin']  = 'auth/index';
+$route['login']  = 'login/index';
+$route['signup'] = 'login/signup';
+$route['newsletter'] = 'newsletter/subscribe';
 //$route['user/login'] = 'user/login';

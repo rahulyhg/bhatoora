@@ -505,7 +505,5 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 
-/* Created by Ravi */
-$config['site_title'] = 'Bhatoora';
-$config['admin_profile_image'] = 'dist/img/user2-160x160.jpg';
+
 

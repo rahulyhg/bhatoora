@@ -5,6 +5,7 @@ class MY_Controller extends CI_Controller
 {
 
     public $data = array();
+    public $template = array();
     
     function __construct() {
         parent::__construct();
@@ -12,6 +13,16 @@ class MY_Controller extends CI_Controller
         $this->load->helper('language');
         $this->data['errors'] = array();
     }
+    
+    //Load layout    
+    public function layout() {
+        // making temlate and send data to view.
+        $this->template['header']   = $this->load->view('layouts/header', $this->data, true);
+        $this->template['content']   = $this->load->view($this->content, $this->data, true);
+        $this->template['footer']   = $this->load->view('layouts/footer', $this->data, true);
+        $this->load->view('layouts/index', $this->template);
+    }
+    
 }
 
 
@@ -42,13 +53,5 @@ class Admin_Controller extends MY_Controller {
 
 }
  
-class Public_Controller extends MY_Controller
-{
- 
-  function __construct()
-  {
-    parent::__construct();
-  }
-}
 
 ?>
