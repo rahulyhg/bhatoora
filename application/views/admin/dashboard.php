@@ -1,4 +1,6 @@
- <!-- Content Header (Page header) -->
+ <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
         Dashboard
@@ -75,8 +77,17 @@
         </div>
         <!-- ./col -->
       </div>
-    <!-- /.row -->
-    
+      <!-- /.row -->
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+       
+        <!-- /.Left col -->
+      
+      </div>
+      <!-- /.row (main row) -->
 
     </section>
     <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->

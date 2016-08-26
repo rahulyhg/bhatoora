@@ -1,17 +1,15 @@
     <!-- DataTables -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/admin/plugins/datatables/dataTables.bootstrap.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/admin/plugins/datatables/dataTables.bootstrap.css">
    <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<div class="content-wrapper">
   
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Manage Categories
-        <small>& Sub categories</small>
+      <h1><?php echo $pageTitle; ?>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url().'admin/dashboard/'; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Manage Categories</li>
+        <li class="active"><?php echo $pageTitle; ?></li>
       </ol>
     </section>
 
@@ -21,9 +19,9 @@
         <div class="col-xs-12">
          
           <div class="box">
-            <div class="box-header">
+<!--            <div class="box-header">
               <h3 class="box-title" style="float:right"><a href="<?php echo base_url(); ?>admin/category/add" class="btn btn-block btn-primary">Add Category</a></h3>
-            </div>
+            </div>-->
               <div>&nbsp;</div>  
             <!-- /.box-header -->
             <div class="box-body">
@@ -32,39 +30,39 @@
                     
                 <tr>
                     <th style="width:10%">Sno</th>
-                    <th style="width:35%">Category</th>
-                    <th style="width:35%">Parent Category</th>
-                    <th style="width:20%">Action</th>
+                    <th style="width:20%">Name</th>
+                    <th style="width:20%">Email</th>
+                    <th style="width:15%">Subscription Date</th>
+                    <th style="width:15%">Unsubscription Date</th>
+                    <th style="width:20%">Subscribed</th>
+                
                 </tr>
                 
                 </thead>
                 <tbody>
                   <?php 
 //                  echo "<pre>";
-//                  print_r($arrCategoryList);
+//                  print_r($arrUserList);
 //                  exit;
                   
-                  if(count($arrCategoryList) > 0 ) {
+                  if(count($arrSubscribers) > 0 ) {
                         $sno  = 1;
-                        foreach($arrCategoryList as $category) { ?>
+                        foreach($arrSubscribers as $subscriber) { ?>
                         <tr>
                             <td><?php echo $sno++; ?></td>
-                            <td><?php echo $category['category_name']; ?></td>
-                            <td><?php echo $category['parent_category_name']; ?></td>
+                            <td><?php echo $subscriber['customer_name']; ?></td>
+                            <td><?php echo $subscriber['email']; ?></td>
+                            <td><?php echo $subscriber['subscription_date']; ?></td>
+                            <td><?php echo $subscriber['unsubscription_date']; ?></td>
                             <td>
-                                <a href="<?php echo base_url() . 'admin/category/edit/id/' . $category['id']; ?>">
-                                    <i class="fa fa-edit"></i> Edit
-                                </a>
-                              
-                                &nbsp;&nbsp;|&nbsp;&nbsp;
-                                
-                                <?php if($category['status'] == 'A') { ?>
-                                <a href="<?php echo base_url() .'admin/category/changestatus/' .$category['id'].'/I'; ?>">
-                                    <i class="fa"></i> Active
+                             
+                                <?php if($subscriber['active'] == 'Y') { ?>
+                                <a href="<?php echo base_url() .'admin/newsletter/changestatus/' .$subscriber['id'].'/N'; ?>">
+                                    <i class="fa"></i> Yes
                                 </a>
                                 <?php } else { ?>
-                                <a href="<?php echo base_url() .'admin/category/changestatus/' .$category['id'].'/A'; ?>">
-                                    <i class="fa"></i> Inactive
+                                <a href="<?php echo base_url() .'admin/newsletter/changestatus/' .$subscriber['id'].'/Y'; ?>">
+                                    <i class="fa"></i> No
                                 </a>
                                 <?php } ?>
                             </td>
@@ -75,14 +73,18 @@
                   }  
                   ?>
                 </tbody>
+                
                 <tfoot>
                 <tr>
-                    <th>Sno</th>
-                    <th>Category</th>
-                    <th>Parent Category</th>
-                    <th>Action</th>
+                    <th style="width:10%">Sno</th>
+                    <th style="width:20%">Name</th>
+                    <th style="width:20%">Email</th>
+                    <th style="width:15%">Subscription Date</th>
+                    <th style="width:15%">Unsubscription Date</th>
+                    <th style="width:20%">Subscribed</th>
                 </tr>
                 </tfoot>
+                
               </table>
             </div>
             <!-- /.box-body -->

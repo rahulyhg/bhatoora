@@ -6,6 +6,9 @@
 <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet" type="text/css" />
 <link href='http://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    
+<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script> 
+    
 </head>
 <body>
 <div class="header-section">
@@ -25,7 +28,7 @@
         <li><a href="<?php echo base_url(); ?>login">Login</a></li>
         <li><a href="<?php echo base_url(); ?>signup">Sign up</a></li>
         <?php }else { ?>
-            <li><a href="<?php echo base_url(); ?>logout">Logout</a></li>
+            <li><a href="<?php echo base_url(); ?>login/logout">Logout</a></li>
         <?php } ?>
       </ul>
         

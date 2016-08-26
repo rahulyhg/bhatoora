@@ -155,4 +155,51 @@ class Login extends MY_Controller {
         }
     }
     
+    public function logout() {
+         $this->session->sess_destroy();
+         redirect(base_url());
+    }
+    
+    
+    public function facebook_login() {
+        
+        if($this->input->post()) {
+//            echo "<pre>";
+//            print_r($this->input->post());
+//            exit;
+//            
+            $email = $this->input->post('email');
+            $fb_id = $this->input->post('fb_id');
+            $name  = $this->input->post('name');
+            
+            $this->load->model('Customer');
+            
+            if(!$this->Customer->isEmailExists($email)) {
+                
+                $insert = array('fname' => $name, 'email' => $email, 'social_identifier' => 'FACEBOOK',
+                     'social_identifier_id' => $fb_id);
+                $intLastInsertId = $this->Customer->register($insert);
+                
+                if(empty($intLastInsertId)) {
+                   // $this->session->set_flashdata('error_message', $this->lang->line('technical_error_message'));
+                    $msg = $this->lang->line('technical_error_message');
+                    $response = array('success' => false, 'msg' => $msg );
+                    echo json_encode($response);
+                    exit;
+               }
+                
+            }
+            
+            /* Create Login Session */
+            $this->Customer->createLoginSession($email);
+            
+            
+            $response = array('success' => true);
+            echo json_encode($response);
+            exit;
+            
+            
+        }
+    }
+    
 }

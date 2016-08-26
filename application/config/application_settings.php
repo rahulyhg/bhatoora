@@ -15,3 +15,5 @@ $config['ui_footer_primary_links']  = array( array('title' => 'Terms' ,  'url'  
                                             );
 
 $config['admin_profile_image'] = 'dist/img/user2-160x160.jpg';
+
+$config['facebook_api_key'] = '181863905567505';

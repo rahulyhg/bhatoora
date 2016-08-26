@@ -17,11 +17,12 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 | This is Category model file.
 | -----------------------------------------------------
 */
-class User extends CI_Model {
+class Registered_users extends CI_Model {
     
     public function getUserDetailByEmail($email) {
         $sql = " SELECT * FROM users WHERE email = '" . $email."'" ;
         return $this->db->query($sql)->result_array();
     }
     
+   
 }

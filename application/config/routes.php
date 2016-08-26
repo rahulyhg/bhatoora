@@ -59,4 +59,7 @@ $route['admin']  = 'auth/index';
 $route['login']  = 'login/index';
 $route['signup'] = 'login/signup';
 $route['newsletter'] = 'newsletter/subscribe';
+$route['admin/customers/list'] = 'admin/customers/listcustomers';
+$route['admin/customers']  = 'admin/customers/listcustomers';
+$route['admin/newsletter'] = 'admin/newsletter/listSubscribers';
 //$route['user/login'] = 'user/login';

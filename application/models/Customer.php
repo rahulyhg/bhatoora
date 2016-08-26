@@ -41,6 +41,29 @@ class Customer extends CI_Model {
         
     }
     
+    public function listCustomers() {
+       $sql = " SELECT * FROM customers " ;
+       return $this->db->query($sql)->result_array();
+    }
+    
+    public function changeStatus($intUserId, $status) {
+        $this->db->where('id',$intUserId);
+        $this->db->update('customers', array('status' => $status));
+    } 
+    
+    
+    public function createLoginSession($email) {
+        $result = $this->getCustomerDetailByEmail($email);
+        
+        $sess_array = array();
+        if(count($result) > 0 ) {
+            $sess_array = array('loggedin_user_id' => $result[0]['id'], 
+                                    'loggedin_user_name' => $result[0]['fname']);
+        }
+        
+        $this->session->set_userdata('logged_in', $sess_array);
+        
+    }
     
     
 }

@@ -2,7 +2,6 @@
 
 class Category extends Admin_Controller
 {
-    public $data = NULL;
  
     function __construct()
     {
@@ -16,8 +15,9 @@ class Category extends Admin_Controller
     function index() {
         $arrCategoryList = $this->Categories->listCategories();
         $this->data['arrCategoryList'] = $arrCategoryList;
-        $this->data['content'] = 'admin/category/list';
-        $this->load->view('admin/templates/admin_template',$this->data);
+        $this->content = 'admin/category/list';
+        //$this->load->view('admin/templates/admin_template',$this->data);
+        $this->layout();
     }
     
     
