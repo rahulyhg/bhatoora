@@ -56,6 +56,12 @@
   </a>
 </li>
 
+<li>
+  <a href="<?php echo base_url(); ?>admin/thoughts">
+    <i class="fa fa-th"></i><span>Manage Thoughts</span>
+  </a>
+</li>
+
 <li class="treeview">
   <a href="#">
     <i class="fa fa-pie-chart"></i>

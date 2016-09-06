@@ -53,6 +53,7 @@ class Customer extends CI_Model {
     
     
     public function createLoginSession($email) {
+        
         $result = $this->getCustomerDetailByEmail($email);
         
         $sess_array = array();

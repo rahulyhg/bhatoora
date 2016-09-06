@@ -1,4 +1,8 @@
 
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+  
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -26,49 +30,84 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <?php 
+            <?php echo form_open($form_submit_url); ?>
             
-            if(!empty($intSelectedCategoryId)) {
-                echo form_open('admin/category/edit/id/' . $intSelectedCategoryId); 
-            } else {
-                echo form_open('admin/category/add'); 
-            }
-            
-            
-            ?>
               <div class="box-body">
                 <div class="form-group">
-                    
-                <label>Category</label>
+                <label>Thought</label>
                 <?php $data = array(
                     'type'          => 'text',    
-                    'name'          => 'category_name',
-                    'id'            => 'category_name',
-                    'maxlength'     => '100',
-                    'placeholder'   => 'Category Name',    
+                    'name'          => 'thought',
+                    'id'            => 'thought',
+                    'maxlength'     => '1000',
+                    'placeholder'   => 'Thought',    
                     'class'         => 'form-control',
-                    'value'         =>  $category_name
+                    'value'         =>  $arrSelectedItemList['thought']
                     );
-                    echo form_error('category_name');
+                    echo form_error('thought');
                     echo form_input($data);
                 ?>
         
         
                 </div>
                 <div class="form-group">
-                    <label>Parent Category</label>
+                    <label>Said by</label>
                     
-                    <?php 
-                    $arrCategoryList[0] = '--Select Parent Category--';
-                    echo form_dropdown('parent_catgory', $arrCategoryList, $parent_category,'class="form-control"'); ?>
+                   <?php $data = array(
+                    'type'          => 'text',    
+                    'name'          => 'said_by',
+                    'id'            => 'said_by',
+                    'maxlength'     => '1000',
+                    'placeholder'   => 'Said by',    
+                    'class'         => 'form-control',
+                    'value'         =>  $arrSelectedItemList['said_by']
+                    );
+                    echo form_error('said_by');
+                    echo form_input($data);
+                    ?>
 
                 </div>
+                  
+                  
+                <div class="form-group">
+                 <label>Order</label>
+
+                <?php $data = array(
+                 'type'          => 'text',    
+                 'name'          => 'seq_ord',
+                 'id'            => 'seq_ord',
+                 'maxlength'     => '2',
+                 'placeholder'   => 'Order',    
+                 'class'         => 'form-control',
+                 'value'         =>  $arrSelectedItemList['seq_ord']
+                 );
+                 echo form_error('seq_order');
+                 echo form_input($data);
+                 ?>
+
+                </div>
+                  
+                  
+<!--                <div class="form-group">
+                    <label>Date:</label>
+
+                    <div class="input-group date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                      <input type="text" class="form-control pull-right" id="datepicker" name="datepicker">
+                    </div>
+                     /.input group 
+                </div>-->
+              <!-- /.form group -->
+              
+              
                
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                  <a href="<?php echo base_url(). 'admin/category'; ?>" class="btn btn-default">Back</a>
+                  <a href="<?php echo base_url(). 'admin/thoughts'; ?>" class="btn btn-default">Back</a>
                   <button type="submit" class="btn btn-primary">Submit</button>
                 
               </div>
@@ -86,3 +125,11 @@
     </section>
     <!-- /.content -->
  
+<!--    <script>
+        $(function () {
+         //Date picker
+        $('#datepicker').datepicker({
+          autoclose: true
+        });
+    });
+    </script>-->

@@ -6,12 +6,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Manage Categories
-        <small>& Sub categories</small>
+          <?php echo $pageTitle; ?>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url().'admin/dashboard/'; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Manage Categories</li>
+        <li class="active"><?php echo $pageTitle; ?></li>
       </ol>
     </section>
 
@@ -22,7 +21,7 @@
          
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title" style="float:right"><a href="<?php echo base_url(); ?>admin/category/add" class="btn btn-block btn-primary">Add Category</a></h3>
+              <h3 class="box-title" style="float:right"><a href="<?php echo base_url(); ?>admin/thoughts/add" class="btn btn-block btn-primary"><?php echo $this->lang->line('add_new_button_text'); ?></a></h3>
             </div>
               <div>&nbsp;</div>  
             <!-- /.box-header -->
@@ -32,8 +31,9 @@
                     
                 <tr>
                     <th style="width:10%">Sno</th>
-                    <th style="width:35%">Category</th>
-                    <th style="width:35%">Parent Category</th>
+                    <th style="width:30%">Thought</th>
+                    <th style="width:30%">Said by</th>
+                    <th style="width:10%">Order</th>
                     <th style="width:20%">Action</th>
                 </tr>
                 
@@ -44,26 +44,27 @@
 //                  print_r($arrCategoryList);
 //                  exit;
                   
-                  if(count($arrCategoryList) > 0 ) {
+                  if(count($arrListData) > 0 ) {
                         $sno  = 1;
-                        foreach($arrCategoryList as $category) { ?>
+                        foreach($arrListData as $row) { ?>
                         <tr>
                             <td><?php echo $sno++; ?></td>
-                            <td><?php echo $category['category_name']; ?></td>
-                            <td><?php echo $category['parent_category_name']; ?></td>
+                            <td><?php echo $row['thought']; ?></td>
+                            <td><?php echo $row['said_by']; ?></td>
+                            <td><?php echo $row['seq_ord']; ?></td>
                             <td>
-                                <a href="<?php echo base_url() . 'admin/category/edit/id/' . $category['id']; ?>">
+                                <a href="<?php echo base_url() . 'admin/thoughts/edit/id/' . $row['id']; ?>">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
                               
                                 &nbsp;&nbsp;|&nbsp;&nbsp;
                                 
-                                <?php if($category['status'] == 'A') { ?>
-                                <a href="<?php echo base_url() .'admin/category/changestatus/' .$category['id'].'/I'; ?>">
+                                <?php if($row['status'] == 'A') { ?>
+                                <a href="<?php echo base_url() .'admin/thoughts/changestatus/' .$row['id'].'/I'; ?>">
                                     <i class="fa"></i> Active
                                 </a>
                                 <?php } else { ?>
-                                <a href="<?php echo base_url() .'admin/category/changestatus/' .$category['id'].'/A'; ?>">
+                                <a href="<?php echo base_url() .'admin/thoughts/changestatus/' .$row['id'].'/A'; ?>">
                                     <i class="fa"></i> Inactive
                                 </a>
                                 <?php } ?>
@@ -76,11 +77,12 @@
                   ?>
                 </tbody>
                 <tfoot>
-                <tr>
-                    <th>Sno</th>
-                    <th>Category</th>
-                    <th>Parent Category</th>
-                    <th>Action</th>
+               <tr>
+                    <th style="width:10%">Sno</th>
+                    <th style="width:30%">Thought</th>
+                    <th style="width:30%">Said by</th>
+                    <th style="width:10%">Order</th>
+                    <th style="width:20%">Action</th>
                 </tr>
                 </tfoot>
               </table>
