@@ -62,6 +62,12 @@
   </a>
 </li>
 
+<li>
+  <a href="<?php echo base_url(); ?>admin/banners">
+    <i class="fa fa-th"></i><span>Manage Banners</span>
+  </a>
+</li>
+
 <li class="treeview">
   <a href="#">
     <i class="fa fa-pie-chart"></i>

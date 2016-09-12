@@ -1,0 +1,9 @@
+#reg .reg_icon {
+	behavior:url('js/PIE.htc');
+    }
+.login_field input {
+	padding-top: 5px;
+	}
+.sub {
+	behavior:url('js/PIE.htc');
+	}

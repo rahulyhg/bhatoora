@@ -1,6 +1,8 @@
 
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -8,7 +10,6 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Category</a></li>
         <li class="active"><?php echo $page_title; ?></li>
       </ol>
     </section>
@@ -28,64 +29,58 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <?php 
-            echo form_open($form_submit_url); 
-            ?>
+            <?php echo form_open_multipart($form_submit_url); ?>
+            
               <div class="box-body">
                 <div class="form-group">
-                    
-                <label>Category</label>
+                <label>Title</label>
                 <?php $data = array(
                     'type'          => 'text',    
-                    'name'          => 'category_name',
-                    'id'            => 'category_name',
-                    'maxlength'     => '100',
-                    'placeholder'   => 'Category Name',    
+                    'name'          => 'title',
+                    'id'            => 'title',
+                    'maxlength'     => '200',
+                    'placeholder'   => 'Title',    
                     'class'         => 'form-control',
-                    'value'         =>  $category_name
+                    'value'         =>  $arrSelectedItemList['title']
                     );
-                    echo form_error('category_name');
+                    echo form_error('title');
                     echo form_input($data);
                 ?>
         
         
                 </div>
                 <div class="form-group">
-                    <label>Parent Category</label>
+                    <label>Banner</label>
                     
-                    <?php 
-                    $arrCategoryList[0] = '--Select Parent Category--';
-                    echo form_dropdown('parent_catgory', $arrCategoryList, $parent_category,'class="form-control"'); ?>
-
+                   <?php 
+                    echo form_error('banner');
+                    echo form_upload(array('name' =>'banner','id'=>'banner')); ?>
+                    
+                    <input type="hidden" name="hidden_banner_name" id="hidden_banner_name" value="<?php echo $arrSelectedItemList['banner_image']; ?>">
+                    
+                    <?php
+                    if(!empty($arrSelectedItemList['banner_image'])) { ?>
+                    <br><br>
+                    <img src="<?php echo base_url(); ?>/uploads/banners/<?php echo $arrSelectedItemList['banner_image']; ?>"
+                         alt="<?php echo $arrSelectedItemList['title']; ?>" width="200" height="75">
+                        
+                    <?php }
+                    ?>
+                    
                 </div>
                   
-                <div class="form-group">
-                    <label>Order</label>
-                    
-                    <?php $data = array(
-                    'type'          => 'text',    
-                    'name'          => 'display_order',
-                    'id'            => 'display_order',
-                    'maxlength'     => '2',
-                    'placeholder'   => 'Display Order',    
-                    'class'         => 'form-control',
-                    'value'         =>  $display_order
-                    );
-                    echo form_error('display_order');
-                    echo form_input($data);
-                ?>
-
-                </div>
+                  
+                  
                
               </div>
               <!-- /.box-body -->
 
               <div class="box-footer">
-                  <a href="<?php echo base_url(). 'admin/category'; ?>" class="btn btn-default">Back</a>
+                  <a href="<?php echo $back_url; ?>" class="btn btn-default">Back</a>
                   <button type="submit" class="btn btn-primary">Submit</button>
                 
               </div>
-            </form>
+          
           </div>
           <!-- /.box -->
 
@@ -98,5 +93,12 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
-  </div>
  
+<!--    <script>
+        $(function () {
+         //Date picker
+        $('#datepicker').datepicker({
+          autoclose: true
+        });
+    });
+    </script>-->

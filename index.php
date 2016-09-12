@@ -284,6 +284,8 @@ switch (ENVIRONMENT)
 	}
 
 	define('VIEWPATH', $view_folder);
+        
+        define('UPLOAD_DIR',str_replace('system/','',BASEPATH));
 
 /*
  * --------------------------------------------------------------------

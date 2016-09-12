@@ -83,6 +83,7 @@ class Thoughts extends Admin_Controller {
             throw new Exception('There has been an error');
         }
         
+        
         $this->data['arrSelectedItemList'] = $arrSelectedItemList[0];
         
         if($this->input->post()) {

@@ -35,62 +35,58 @@ class Login extends MY_Controller {
         //$this->load->view('login/index');
 
         /* Set validation rule for username field in the form */ 
-        $this->form_validation->set_rules('username', 'User Name', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean'); 
+       // $this->form_validation->set_rules('username', 'User Name', 'trim|required|xss_clean');
+      //  $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean'); 
          
        
         if($this->input->post()) {
             
-            $this->data['username'] = $email    = $this->input->post('username');
-            $this->data['password'] = $password = $this->input->post('password');
-          
+            $email    = $this->input->post('email');
+            $password = $this->input->post('password');
             
-            if ($this->form_validation->run() == FALSE) { 
-                //$this->load->view('login/index',$this->data);
-              
-                //redirect('login');
-            } else {
-                $this->load->model('Customer');
-                
-               // $objUser = new User();
-                $response = $this->Customer->getCustomerDetailByEmail($email);
-                
-//                echo md5($password);
-//                echo "<br>";
-//                echo $response[0]['password'];
-//                
-                if(md5($password) != $response[0]['password']) {
-                    $this->data['error_message'] = 'Invalid Password.';
-                    $this->data['username'] = $email;
-                    $this->content = 'login/index';
-                    $this->layout();
-                    //redirect('login');
-                } else {
-                    $loggedinUser = array('loggedin_email' => $response[0]['email'], 
-                                'loggedin_fname' => $response[0]['fname']);
-                    $this->session->set_userdata($loggedinUser);
-                    redirect(base_url());
-                    exit;
-                }
-                
-                
-//                echo "<pre>";
-//                print_r($response);
-//                exit;
-                
-                
+            if(empty($email)) {
+                $jsonResponse = array('success' => false, 'message' => 'Please enter your email Id.');
+                echo json_encode($jsonResponse);
+                exit;
             }
-         
-//            echo "<pre>";
-//            print_r($this->input->post());
-//            exit;
+            
+            if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+                $jsonResponse = array('success' => false, 'message' => 'Please enter a valid email Id.');
+                echo json_encode($jsonResponse);
+                exit;
+            }
+            
+            if(empty($password)) {
+                $jsonResponse = array('success' => false, 'message' => 'Please enter your password.');
+                echo json_encode($jsonResponse);
+                exit;
+            }
+            
+           
+                
+            
+            $this->load->model('Customer');
+
+            $response = $this->Customer->getCustomerDetailByEmail($email);
+
+
+            if(md5($password) != $response[0]['password']) {
+                $jsonResponse = array('success' => false, 'message' => 'Invalid Password');
+                echo json_encode($jsonResponse);
+                exit;
+
+            } else {
+                $loggedinUser = array('loggedin_email' => $response[0]['email'], 
+                            'loggedin_fname' => $response[0]['fname']);
+                $this->session->set_userdata($loggedinUser);
+                
+                $jsonResponse = array('success' => true);
+                echo json_encode($jsonResponse);
+                exit;
+            }
             
         }
-        $this->content = 'login/index';
-        $this->layout();
-        
-        //  $this->data['content'] = 'admin/category/list';
-       // $this->load->view('admin/templates/admin_template',$this->data);
+
     }
     
     

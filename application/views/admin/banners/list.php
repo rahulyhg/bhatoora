@@ -6,12 +6,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Manage Categories
-        <small>& Sub categories</small>
+          <?php echo $pageTitle; ?>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url().'admin/dashboard/'; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Manage Categories</li>
+        <li class="active"><?php echo $pageTitle; ?></li>
       </ol>
     </section>
 
@@ -21,19 +20,8 @@
         <div class="col-xs-12">
          
           <div class="box">
-              
-                <div class="box-header with-border">
-                <h3 class="box-title">
-                    <?php echo $this->session->flashdata('error_message'); ?>
-                    <?php echo $this->session->flashdata('success_message'); ?>
-                </h3>
-            </div>
             <div class="box-header">
-                
-          
-                
-                
-              <h3 class="box-title" style="float:right"><a href="<?php echo base_url(); ?>admin/category/add" class="btn btn-block btn-primary">Add Category</a></h3>
+              <h3 class="box-title" style="float:right"><a href="<?php echo base_url(); ?>admin/banners/add" class="btn btn-block btn-primary"><?php echo $this->lang->line('add_new_button_text'); ?></a></h3>
             </div>
               <div>&nbsp;</div>  
             <!-- /.box-header -->
@@ -43,9 +31,9 @@
                     
                 <tr>
                     <th style="width:10%">Sno</th>
-                    <th style="width:30%">Category</th>
-                    <th style="width:30%">Parent Category</th>
-                    <th style="width:10%">Order</th>
+                    <th style="width:30%">Image</th>
+                    <th style="width:30%">Title</th>
+                    <th style="width:10%">Status</th>
                     <th style="width:20%">Action</th>
                 </tr>
                 
@@ -56,37 +44,30 @@
 //                  print_r($arrCategoryList);
 //                  exit;
                   
-                  if(count($arrCategoryList) > 0 ) {
+                  if(count($arrListData) > 0 ) {
                         $sno  = 1;
-                        foreach($arrCategoryList as $category) { ?>
+                        foreach($arrListData as $row) { ?>
                         <tr>
                             <td><?php echo $sno++; ?></td>
-                            <?php if(empty($category['parent_category_id'])) { ?>
-                                <td><strong><?php echo $category['category_name']; ?></strong></td>
-                            <?php } else { ?>
-                                <td><?php echo $category['category_name']; ?></td>
-                            <?php } ?>
-                            
-                            
-                            <td><?php echo $category['parent_category_name']; ?></td>
-                            <td><?php echo $category['display_order']; ?></td>
+                            <td><img src="<?php echo base_url(); ?>/uploads/banners/<?php echo $row['banner_image']; ?>" alt="<?php echo $row['title']; ?>" width="100" height="50"></td>
+                            <td><?php echo $row['title']; ?></td>
                             <td>
-                                <a href="<?php echo base_url() . 'admin/category/edit/id/' . $category['id']; ?>">
-                                    <i class="fa fa-edit"></i> Edit
-                                </a>
                               
-                                &nbsp;&nbsp;|&nbsp;&nbsp;
-                                
-                                <?php if($category['status'] == 'A') { ?>
-                                <a href="<?php echo base_url() .'admin/category/changestatus/' .$category['id'].'/I'; ?>">
+                                 <?php if($row['status'] == 'A') { ?>
+                                <a href="<?php echo base_url() .'admin/banners/changestatus/' .$row['id'].'/I'; ?>">
                                     <i class="fa"></i> Active
                                 </a>
                                 <?php } else { ?>
-                                <a href="<?php echo base_url() .'admin/category/changestatus/' .$category['id'].'/A'; ?>">
+                                <a href="<?php echo base_url() .'admin/banners/changestatus/' .$row['id'].'/A'; ?>">
                                     <i class="fa"></i> Inactive
                                 </a>
                                 <?php } ?>
                             </td>
+                            <td>
+                                <a href="<?php echo base_url() . 'admin/banners/edit/id/' . $row['id']; ?>">
+                                    <i class="fa fa-edit"></i> Edit
+                                </a>
+                            </td>    
                         </tr>
                         <?php
                       
@@ -95,11 +76,11 @@
                   ?>
                 </tbody>
                 <tfoot>
-               <tr>
+              <tr>
                     <th style="width:10%">Sno</th>
-                    <th style="width:30%">Category</th>
-                    <th style="width:30%">Parent Category</th>
-                    <th style="width:10%">Order</th>
+                    <th style="width:30%">Image</th>
+                    <th style="width:30%">Title</th>
+                    <th style="width:10%">Status</th>
                     <th style="width:20%">Action</th>
                 </tr>
                 </tfoot>

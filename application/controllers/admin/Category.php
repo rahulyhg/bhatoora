@@ -25,6 +25,7 @@ class Category extends Admin_Controller
         
         $this->data['page_title'] = 'Add Category';
         
+        $this->data['form_submit_url'] = 'admin/category/add'; 
         
         $arrCategoryList = $this->Categories->listCategories();
         
@@ -36,9 +37,7 @@ class Category extends Admin_Controller
         }
          $this->data['arrCategoryList'] = $response;
          
-         
-         
-       
+      
         /* Set rules */
         $this->form_validation->set_rules('category_name', 'Category Name','required|min_length[3]|max_length[75]');
         // hold error messages in div
@@ -62,7 +61,8 @@ class Category extends Admin_Controller
             {
                 /* Insert data in database */
                 $insert = array('category_name' => $this->input->post('category_name'), 
-                                'parent_category' => $this->input->post('parent_catgory')
+                                'parent_category' => $this->input->post('parent_catgory'),
+                                'display_order'   => $this->input->post('display_order')
                                 );
                 
                 $intLastInsertId = $this->Categories->addCategory($insert);
@@ -77,10 +77,11 @@ class Category extends Admin_Controller
             }
             
             
-        } else {
-            $this->data['content'] = 'admin/category/add_edit';
-            $this->load->view('admin/templates/admin_template',$this->data);
-        }
+        } 
+        
+        $this->content = 'admin/category/add_edit';
+        $this->layout();
+     
     }
     
     public function edit() {
@@ -93,6 +94,9 @@ class Category extends Admin_Controller
             throw new Exception('Category Id not found.');
         }
         
+        $this->data['form_submit_url'] = 'admin/category/edit/id/' . $intSelectedCategoryId; 
+         
+         
         $objCategory = new Categories();
         $objCategory->strCondition = " AND cat.id = " . $intSelectedCategoryId;
         $arrSelectedCategoryList = $objCategory->listCategories();
@@ -129,6 +133,7 @@ class Category extends Admin_Controller
         
         $this->data['category_name']   =  $arrSelectedCategoryList[0]['category_name'];
         $this->data['parent_category'] =  $arrSelectedCategoryList[0]['parent_category_id'];
+        $this->data['display_order']   =  $arrSelectedCategoryList[0]['display_order'];
                 
         if($this->input->post()) {
             
@@ -143,8 +148,9 @@ class Category extends Admin_Controller
             else
             {
                 /* Insert data in database */
-                $update = array('category_name' => $this->input->post('category_name'), 
-                                'parent_category' => $this->input->post('parent_catgory')
+                $update = array('category_name'   => $this->input->post('category_name'), 
+                                'parent_category' => $this->input->post('parent_catgory'),
+                                'display_order'   => $this->input->post('display_order')
                                 );
                 
                 $response = $this->Categories->updateCategory($intSelectedCategoryId, $update);
@@ -155,15 +161,15 @@ class Category extends Admin_Controller
                     $this->load->view('admin/templates/admin_template',$this->data);
                 } else {
                     $this->session->set_flashdata('success_message', 'Information has been updated successfully.');
-                    redirect('/admin/category/edit/id/' . $intSelectedCategoryId);
+                    redirect('/admin/category/');
                 }
             }
             
             
-        } else {
-            $this->data['content'] = 'admin/category/add_edit';
-            $this->load->view('admin/templates/admin_template',$this->data);
         }
+        
+        $this->content = 'admin/category/add_edit';
+        $this->layout();
     }
     
     public function changeStatus() {

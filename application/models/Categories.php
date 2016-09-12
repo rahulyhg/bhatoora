@@ -20,10 +20,20 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Categories extends CI_Model {
     
     public $strCondition = '';
+    public $orderByField = ' cat.category_name ';
+    public $orderBy = ' asc ';
+    
+    public function __construct() {
+        $this->config->load('application_settings');
+    }
     
     public function listCategories($intCategoryId = '', $intParentCategoryId = '') {
         
-        $sql =" SELECT cat.id, cat.category_name, cat_parent.category_name as parent_category_name, "
+       /* $arrCategories = $this->config->item('categories');
+        return $arrCategories; */
+        
+     
+        $sql =" SELECT cat.id, cat.category_name, cat_parent.category_name as parent_category_name, cat.display_order, "
                 . " cat.parent_category as parent_category_id, cat.status, "
                 . "   cat.description FROM category cat left join category cat_parent"
                 . "   on cat.parent_category = cat_parent.id WHERE 1 ";
@@ -33,12 +43,12 @@ class Categories extends CI_Model {
             $sql .= $this->strCondition;
         }
         
-        $sql .= "  order by category_name " ;
+        $sql .= "  order by " . $this->orderByField ." " . $this->orderBy ;
         
-        //echo $sql;
+       // echo $sql;
         
         return $this->db->query($sql)->result_array();
-        
+     
     }
     
     public function addCategory($data) {

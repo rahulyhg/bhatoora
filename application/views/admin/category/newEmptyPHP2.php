@@ -5,13 +5,11 @@
   
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Manage Categories
-        <small>& Sub categories</small>
+      <h1><?php echo $pageTitle; ?>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url().'admin/dashboard/'; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Manage Categories</li>
+        <li class="active"><?php echo $pageTitle; ?></li>
       </ol>
     </section>
 
@@ -21,20 +19,9 @@
         <div class="col-xs-12">
          
           <div class="box">
-              
-                <div class="box-header with-border">
-                <h3 class="box-title">
-                    <?php echo $this->session->flashdata('error_message'); ?>
-                    <?php echo $this->session->flashdata('success_message'); ?>
-                </h3>
-            </div>
-            <div class="box-header">
-                
-          
-                
-                
+<!--            <div class="box-header">
               <h3 class="box-title" style="float:right"><a href="<?php echo base_url(); ?>admin/category/add" class="btn btn-block btn-primary">Add Category</a></h3>
-            </div>
+            </div>-->
               <div>&nbsp;</div>  
             <!-- /.box-header -->
             <div class="box-body">
@@ -43,46 +30,39 @@
                     
                 <tr>
                     <th style="width:10%">Sno</th>
-                    <th style="width:30%">Category</th>
-                    <th style="width:30%">Parent Category</th>
-                    <th style="width:10%">Order</th>
-                    <th style="width:20%">Action</th>
+                    <th style="width:20%">Name</th>
+                    <th style="width:15%">Email</th>
+                    <th style="width:15%">Phone</th>
+                    <th style="width:15%">Membership</th>
+                    <th style="width:10%">Register</th>
+                    <th style="width:10%">Status</th>
                 </tr>
                 
                 </thead>
                 <tbody>
                   <?php 
 //                  echo "<pre>";
-//                  print_r($arrCategoryList);
+//                  print_r($arrUserList);
 //                  exit;
                   
-                  if(count($arrCategoryList) > 0 ) {
+                  if(count($arrUserList) > 0 ) {
                         $sno  = 1;
-                        foreach($arrCategoryList as $category) { ?>
+                        foreach($arrUserList as $user) { ?>
                         <tr>
                             <td><?php echo $sno++; ?></td>
-                            <?php if(empty($category['parent_category_id'])) { ?>
-                                <td><strong><?php echo $category['category_name']; ?></strong></td>
-                            <?php } else { ?>
-                                <td><?php echo $category['category_name']; ?></td>
-                            <?php } ?>
-                            
-                            
-                            <td><?php echo $category['parent_category_name']; ?></td>
-                            <td><?php echo $category['display_order']; ?></td>
+                            <td><?php echo $user['fname']; ?></td>
+                            <td><?php echo $user['email']; ?></td>
+                            <td><?php echo $user['contactno']; ?></td>
+                            <td><?php echo $user['registration_dt']; ?></td>
+                            <td><?php echo $user['signup_via']; ?></td>
                             <td>
-                                <a href="<?php echo base_url() . 'admin/category/edit/id/' . $category['id']; ?>">
-                                    <i class="fa fa-edit"></i> Edit
-                                </a>
-                              
-                                &nbsp;&nbsp;|&nbsp;&nbsp;
-                                
-                                <?php if($category['status'] == 'A') { ?>
-                                <a href="<?php echo base_url() .'admin/category/changestatus/' .$category['id'].'/I'; ?>">
+                             
+                                <?php if($user['status'] == 'A') { ?>
+                                <a href="<?php echo base_url() .'admin/customers/changestatus/' .$user['id'].'/I'; ?>">
                                     <i class="fa"></i> Active
                                 </a>
                                 <?php } else { ?>
-                                <a href="<?php echo base_url() .'admin/category/changestatus/' .$category['id'].'/A'; ?>">
+                                <a href="<?php echo base_url() .'admin/customers/changestatus/' .$user['id'].'/A'; ?>">
                                     <i class="fa"></i> Inactive
                                 </a>
                                 <?php } ?>
@@ -94,15 +74,19 @@
                   }  
                   ?>
                 </tbody>
+                
                 <tfoot>
-               <tr>
+                <tr>
                     <th style="width:10%">Sno</th>
-                    <th style="width:30%">Category</th>
-                    <th style="width:30%">Parent Category</th>
-                    <th style="width:10%">Order</th>
-                    <th style="width:20%">Action</th>
+                    <th style="width:20%">Name</th>
+                    <th style="width:15%">Email</th>
+                    <th style="width:15%">Phone</th>
+                    <th style="width:15%">Membership</th>
+                    <th style="width:10%">Register</th>
+                    <th style="width:10%">Status</th>
                 </tr>
                 </tfoot>
+                
               </table>
             </div>
             <!-- /.box-body -->

@@ -11,4 +11,13 @@ function calenderToDb($date) {
 }
 
 
+function cleanFileName($string) {
+    $string = strtolower($string);
+    $string = str_replace('&', '_', $string);
+    $string = str_replace('?', '_', $string);
+    $string = str_replace(' ', '_', $string);
+    return $string;
+}
+
+
 ?>

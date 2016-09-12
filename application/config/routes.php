@@ -63,4 +63,5 @@ $route['admin/customers/list'] = 'admin/customers/listcustomers';
 $route['admin/customers']  = 'admin/customers/listcustomers';
 $route['admin/newsletter'] = 'admin/newsletter/listSubscribers';
 $route['admin/thoughts'] = 'admin/thoughts/listThoughts';
+$route['admin/banner'] = 'admin/banner/listbanners';
 //$route['user/login'] = 'user/login';
